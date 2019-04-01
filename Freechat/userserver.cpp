@@ -1,20 +1,19 @@
 /*
-***Copyright (C) 2019 Freechat Inc
+***Copyleft (C) 2019 Softwater, Inc
 ***Contact: bogdyname@gmail.com
 */
 
 #include <QtNetwork>
-#include <QHostAddress>
 #include "userserver.h"
 #include "connection.h"
 
-Server::Userserver(QObject *parent)
+UserServer::UserServer(QObject *parent)
     : QTcpServer(parent)
 {
     listen(QHostAddress::Any);
 }
 
-void Server::InComingConnection(qintptr socketDescription)
+void UserServer::InComingConnection(qintptr socketDescription)
 {
     Connection *connection = new Connection(socketDescription, this);
     emit NewConnection(connection);

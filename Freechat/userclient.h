@@ -1,5 +1,5 @@
 /*
-***Copyright (C) 2019 Freechat Inc
+***Copyleft (C) 2019 Softwater, Inc
 ***Contact: bogdyname@gmail.com
 */
 
@@ -38,7 +38,7 @@ private slots:
 private:
     void removeConnection(Connection *connection);
 
-    Server server;
+    UserServer userserver;
     PeerManager *peerManager;
     QMultiHash<QHostAddress, Connection *> peers;
 };

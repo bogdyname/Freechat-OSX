@@ -1,16 +1,10 @@
 /*
-***Copyright (C) 2019 Freechat Inc
+***Copyleft (C) 2019 Softwater, Inc
 ***Contact: bogdyname@gmail.com
 */
 
 #include "multimedia.h"
 
-multimedia::multimedia()
+Multimedia::Multimedia()
 {
-    /*
-     CODE
-     WILL
-     BE
-     HERE
-    */
 }

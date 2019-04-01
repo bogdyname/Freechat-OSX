@@ -1,5 +1,5 @@
 /*
-***Copyright (C) 2019 Freechat Inc
+***Copyleft (C) 2019 Softwater, Inc
 ***Contact: bogdyname@gmail.com
 */
 
@@ -7,23 +7,27 @@
 #define DATASAVE_H
 
 #include <QTextStream>
+#include <QSaveFile>
 #include <QIODevice>
 #include <QFile>
 
-class datasave : public QFile
+class Freechat;
+class Duinterface;
+
+class Datasave : public QSaveFile
 {
     Q_OBJECT
 
 public:
-    datasave()
-    {
-        /*
-         CODE
-         WILL
-         BE
-         HERE
-        */
-    }
+    bool saveFileVariable = false;
+    bool deleteFileVariable = false;
+
+public:
+    Datasave(QObject *parent = nullptr);
+
+    bool SaveFile();
+    bool DeleteFile();
+    QFile DataWriterInFile(QFile &fileWithData);
 };
 
 #endif // DATASAVE_H

@@ -1,17 +1,16 @@
 /*
-***Copyright (C) 2019 Freechat Inc
+***Copyleft (C) 2019 Softwater, Inc
 ***Contact: bogdyname@gmail.com
 */
 
 #ifndef MULTIMEDIA_H
 #define MULTIMEDIA_H
 
-#include <QSettings>
 
-class multimedia
+class Multimedia
 {
 public:
-    multimedia();
+    Multimedia();
 };
 
 #endif // MULTIMEDIA_H

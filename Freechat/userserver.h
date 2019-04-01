@@ -1,5 +1,5 @@
 /*
-***Copyright (C) 2019 Freechat Inc
+***Copyleft (C) 2019 Softwater, Inc
 ***Contact: bogdyname@gmail.com
 */
 
@@ -8,23 +8,22 @@
 
 #include <QtNetwork>
 #include <QTcpServer>
-#include <QSctpServer>
 #include <QHostAddress>
 
 class Connection;
 
-class Server : public QTcpServer
+class UserServer : public QTcpServer
 {
     Q_OBJECT
 
 public:
-        QTcpServer(QObject *parent = nullptr);
+        UserServer(QObject *parent = nullptr);
 
 signals:
         void NewConnection(Connection *connection);
 
 protected:
-        void InComingConnection(qintptr socketDescription) override;
+        void InComingConnection(qintptr socketDescription);
 };
 
 #endif // USERSERVER_H
