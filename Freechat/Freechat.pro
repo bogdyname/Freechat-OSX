@@ -8,6 +8,7 @@ QT       += core gui
 QT       += network
 QT       += gui
 QT       += multimedia
+QT       += multimediawidgets
 QT       += svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -18,6 +19,9 @@ TEMPLATE = app
 DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++11
+CONFIG += console
+CONFIG += app_bundle
+CONFIG += qt
 
 SOURCES += \
         main.cpp \
@@ -30,7 +34,9 @@ SOURCES += \
         usernametable.cpp \
         multimedia.cpp \
         peermanager.cpp \
-        duinterface.cpp
+        duinterface.cpp \
+        videoviewer.cpp \
+    pictureviewer.cpp
 
 HEADERS += \
         freechat.h \
@@ -42,11 +48,14 @@ HEADERS += \
         usernametable.h \
         multimedia.h \
         peermanager.h \
-        duinterface.h
+        duinterface.h \
+        videoviewer.h \
+    pictureviewer.h
 
 FORMS += \
         freechat.ui \
-        duinterface.ui
+        duinterface.ui \
+        multimedia.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

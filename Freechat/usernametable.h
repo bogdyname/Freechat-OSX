@@ -17,6 +17,7 @@
 #include <QList>
 
 class Freechat;
+class Username;
 class Connection;
 
 class Usernametable : public QObject
