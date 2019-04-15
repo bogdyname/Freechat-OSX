@@ -32,11 +32,7 @@ SOURCES += \
         datasave.cpp \
         username.cpp \
         usernametable.cpp \
-        multimedia.cpp \
-        peermanager.cpp \
-        duinterface.cpp \
-        videoviewer.cpp \
-    pictureviewer.cpp
+        peermanager.cpp
 
 HEADERS += \
         freechat.h \
@@ -46,16 +42,10 @@ HEADERS += \
         datasave.h \
         username.h \
         usernametable.h \
-        multimedia.h \
-        peermanager.h \
-        duinterface.h \
-        videoviewer.h \
-    pictureviewer.h
+        peermanager.h
 
 FORMS += \
-        freechat.ui \
-        duinterface.ui \
-        multimedia.ui
+        freechat.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
