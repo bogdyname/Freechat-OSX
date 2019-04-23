@@ -541,7 +541,7 @@ int main(int argc, char *argv[])
         }
         else
         {
-            /*CLEAR CODE*/
+            /*clear code*/
         }
 
         QNetworkSession *networkSession = new QNetworkSession(config, &app);
@@ -570,12 +570,12 @@ int main(int argc, char *argv[])
         }
         else
         {
-            /*CLEAR CODE*/
+            /*clear code*/
         }
     }
     else
     {
-        /*CLEAR CODE*/
+        /*clear code*/
     }
 
     Freechat freechat;
