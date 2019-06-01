@@ -34,16 +34,14 @@ public:
 signals:
     void RunTimeIsOver();
     void SaveDataFileAs();
-    void UpToBeginOfFile();
-    void DropToEndOfFile();
     void CheckYourMemorySize();
+    void ReadFileForViewMessages();
     void CheckUsernameForSaveFile();
 
 public slots:
     void DeleteAllDataForFreeMemory();
     void RunBackupFiles();
-    void ToBeginOfFile();
-    void ToEndOfFile();
+    void ReadFile();
 
 protected:
     bool CheckForFileExists();
