@@ -15,6 +15,7 @@
 #include <QIODevice>
 #include <QHostInfo>
 #include <QSaveFile>
+#include <QDateTime>
 #include <QString>
 #include <QFile>
 
@@ -25,24 +26,16 @@ class Usernametable : public QFile
     Q_OBJECT
 
 public:
+    ~Usernametable();
     Usernametable(QObject *parent = nullptr);
+    Usernametable(Usernametable &&MoveNameSource, QFile &);
 
-    void GetIpAddress();
-    QString GetMacAddress();
-    QString GetIpV4AndV6Protocol();
+    inline void GetIpAddresses();
+    inline void GetMacAddresses(QString textWithMacAddresOfUser);
+    inline QString GetIpV4AndV6Protocol();
 
-public:
-    QFile name;
-    QString TranslationName();
-
-public:
-    QFile macAddres;
-    void SaveUsersMACAddresses();
-    QString textWithMacAddresOfUser;
-
-protected:
-    bool CheckForMACFileExists();
-    bool CheckForMACFileIsOpen();
+private:
+    void TranslationName(QFile &fileWithMAC, QString &translator);
 
 public:
     int nIter = 0;
