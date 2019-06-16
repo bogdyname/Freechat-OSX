@@ -26,15 +26,13 @@ SOURCES += \
         main.cpp \
         freechat.cpp \
         datasave.cpp \
-        username.cpp \
-        usernametable.cpp
+        username.cpp
 
 HEADERS += \
         connectionf2f.h \
         freechat.h \
         datasave.h \
-        username.h \
-        usernametable.h
+        username.h
 
 FORMS += \
         freechat.ui
