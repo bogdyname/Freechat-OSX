@@ -76,6 +76,16 @@
        </property>
       </widget>
      </item>
+     <item>
+      <widget class="QListView" name="listViewWithNetworkData">
+       <property name="maximumSize">
+        <size>
+         <width>150</width>
+         <height>150</height>
+        </size>
+       </property>
+      </widget>
+     </item>
     </layout>
    </item>
    <item>

@@ -7,42 +7,49 @@
 #include "datasave.h"
 #include "freechat.h"
 #include "connectionf2f.h"
-#include "usernametable.h"
 
 Username::Username(QObject *parent)
     : QFile(parent)
 {
-    connect(   , SIGNAL(AskUserForReadContactName()),
-            this, SLOT(FileForWritingIpAddress()));
-    connect(   , SIGNAL(AskUserForReadContactName()),
-            this, SLOT(FileForWritingMACAddress()));
-    connect(   , SIGNAL(AskUserForWriteContactName()),
-            this, SLOT(FileForReadingIpAddress();));
-    connect(   , SIGNAL(AskUserForWriteContactName()),
-            this, SLOT(FileForReadingMACAddress();));
-
-    userMACAddress.setFileName("userMAC.txt");
-    writeUserMACAddressToUserIpAddress.setFileName("swapmtoi.txt");
-    userIpAddress.setFileName("userIP.txt");
-    checkWriterFileMACToIp.setFileName("swapmtoipo.txt");
-}
-
-void Username::ReadingIpAddress()
-{
 
 }
 
-void Username::ReadingMACAddress()
+void Username::ReadingIpAddress(QFile &fileWithIP)
 {
+    if ((fileWithIP.exists()) && (fileWithIP.open(ReadOnly)))
+    {
+        ui->textBrowser->setTextWithNetworkData(fileWithIP.readAll());
+        fileWithIP.close();
+    }
+    else
+    {
+        /*clear code*/
+    }
 
+    return;
+}
+
+void Username::ReadingMACAddress(QFile &fileWithMac)
+{
+    if ((fileWithMac.exists()) && (fileWithMac.open(ReadOnly)))
+    {
+        ui->listViewWithNetworkData->setText(fileWithMac.readAll());
+        fileWithMac.close();
+    }
+    else
+    {
+        /*clear code*/
+    }
+
+    return;
 }
 
 Usernametable::Usernametable(QObject *parent)
     : QFile(parent)
 {
-          foreach (const QHostAddress & a, addresses)
+          foreach (const QHostAddress &addr, addresses)
           {
-              switch (a.protocol())
+              switch (addr.protocol())
               {
                   case QAbstractSocket::IPv4Protocol:
                       protocol = "IPv4";
@@ -51,7 +58,7 @@ Usernametable::Usernametable(QObject *parent)
                       protocol = "IPv6";
                   break;
               }
-              qDebug() << a.toString() << "(" << protocol << ")";
+              qDebug() << addr.toString() << "(" << protocol << ")";
           }
 
           QString macOfUser;
@@ -81,7 +88,7 @@ inline QString Usernametable::GetIpV4AndV6Protocol()
         if((list[nIter].protocol() == QAbstractSocket::IPv4Protocol) &&
                 (list[nIter].protocol() == QAbstractSocket::IPv6Protocol))
         {
-            qDebug() << list[nIter].toString() << endl;
+            list[nIter].toString();
         }
         else
         {
@@ -108,7 +115,7 @@ inline void Usernametable::GetIpAddresses()
     return;
 }
 
-inline void Usernametable::GetMacAddresses(QString textWithMacAddresOfUser)
+inline void Usernametable::GetMacAddresses(QString &textWithMacAddresOfUser)
 {
             foreach(QNetworkInterface interface, QNetworkInterface::allInterfaces())
             {
@@ -120,7 +127,7 @@ inline void Usernametable::GetMacAddresses(QString textWithMacAddresOfUser)
 
 void Usernametable::TranslationName(QFile &fileWithMAC, QString &translator)
 {
-
+    fileWithMAC = ReadingMACAddress(fileWithMAC);
 
     return;
 }

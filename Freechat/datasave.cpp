@@ -11,7 +11,6 @@
 #include "username.h"
 #include "datasave.h"
 #include "freechat.h"
-#include "usernametable.h"
 
 Datasave::Datasave(QObject *parent)
     : QFile(parent)
@@ -92,6 +91,8 @@ Datasave::~Datasave()
 void Datasave::CheckUsernameForSaveFile()
 {
 
+
+
     return;
 }
 
@@ -158,7 +159,7 @@ inline void Datasave::ReadFile(QFile &fileWithData)
 {
     if ((fileWithData.exists()) && (fileWithData.open(ReadOnly)))
     {
-        ui->textBrowser->setText(fileWithData.readAll());
+        ui->textFieldForViewMessages->setText(fileWithData.readAll());
         fileWithData.close();
     }
     else

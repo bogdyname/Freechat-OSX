@@ -32,8 +32,8 @@ public:
     Username(QObject *parent = nullptr);
 
 public slots:
-    void ReadingIpAddress();
-    void ReadingMACAddress();
+    void ReadingIpAddress(QFile &fileWithIP);
+    void ReadingMACAddress(QFile &fileWithMac);
 };
 
 #endif // USERNAME_H
@@ -53,7 +53,7 @@ public:
     Usernametable(Usernametable &&MoveNameSource, QFile &);
 
     inline void GetIpAddresses();
-    inline void GetMacAddresses(QString textWithMacAddresOfUser);
+    inline void GetMacAddresses(QString &textWithMacAddresOfUser);
     inline QString GetIpV4AndV6Protocol();
 
 private:
