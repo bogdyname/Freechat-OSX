@@ -7,6 +7,7 @@
 #include <QtCore/QCoreApplication>
 #include <QAbstractSocket>
 #include <QHostAddress>
+#include <QJsonObject>
 #include <QTextStream>
 #include <QDataStream>
 #include <QByteArray>
@@ -14,6 +15,7 @@
 #include <QHostInfo>
 #include <QSaveFile>
 #include <QDateTime>
+#include <QtNetwork>
 #include <QString>
 #include <QFile>
 
@@ -21,8 +23,7 @@
 #define USERNAME_H
 
 class Freechat;
-class Connection;
-class Usernametable;
+class ConnectionF2F;
 
 class Username : public QFile
 {
@@ -30,10 +31,12 @@ class Username : public QFile
 
 public:
     Username(QObject *parent = nullptr);
+    ~Username();
 
-public slots:
-    void ReadingIpAddress(QFile &fileWithIP);
-    void ReadingMACAddress(QFile &fileWithMac);
+private slots:
+    inline void ReadingIpAddress(QFile &fileWithIP);
+    inline void ReadingMACAddress(QFile &fileWithMac);
+    void TranslationName(QFile &fileWithMAC, QString &translator);
 };
 
 #endif // USERNAME_H
@@ -41,30 +44,19 @@ public slots:
 #ifndef USERNAMETABLE_H
 #define USERNAMETABLE_H
 
-class Username;
-
-class Usernametable : public QFile
+class Usernametable : public Username
 {
     Q_OBJECT
 
 public:
-    ~Usernametable();
     Usernametable(QObject *parent = nullptr);
-    Usernametable(Usernametable &&MoveNameSource, QFile &);
+    ~Usernametable();
 
-    inline void GetIpAddresses();
-    inline void GetMacAddresses(QString &textWithMacAddresOfUser);
-    inline QString GetIpV4AndV6Protocol();
-
-private:
-    void TranslationName(QFile &fileWithMAC, QString &translator);
-
-public:
-    int nIter = 0;
-    int nInter = 0;
-    QString protocol = "???";
-    QList<QHostAddress> list = QNetworkInterface::allAddresses();
-    QList<QHostAddress> addresses = QHostInfo::fromName(QHostInfo::localHostName()).addresses();
+protected:
+    inline void MakeFileWithIp();
+    inline void MakeFileWithMac();
+    void GetIpAddressFromWAN(QString &textWithIPAddres);
+    inline void GetMacAddress(QString &textWithMacAddresOfUser);
 };
 
 

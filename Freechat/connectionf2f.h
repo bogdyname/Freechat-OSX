@@ -7,7 +7,6 @@
 #include <QAbstractSocket>
 #include <QNetworkSession>
 #include <QHostAddress>
-#include <QHostAddress>
 #include <QTimerEvent>
 #include <QTcpSocket>
 #include <QHostInfo>

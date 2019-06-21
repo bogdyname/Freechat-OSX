@@ -77,11 +77,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QListView" name="listViewWithNetworkData">
+      <widget class="QTextEdit" name="listViewWithNetworkData">
        <property name="maximumSize">
         <size>
          <width>150</width>
-         <height>150</height>
+         <height>16777215</height>
         </size>
        </property>
       </widget>

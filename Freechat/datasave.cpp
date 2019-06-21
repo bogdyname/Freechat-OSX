@@ -91,8 +91,6 @@ Datasave::~Datasave()
 void Datasave::CheckUsernameForSaveFile()
 {
 
-
-
     return;
 }
 
@@ -159,7 +157,7 @@ inline void Datasave::ReadFile(QFile &fileWithData)
 {
     if ((fileWithData.exists()) && (fileWithData.open(ReadOnly)))
     {
-        ui->textFieldForViewMessages->setText(fileWithData.readAll());
+        ui->textBrowser->setText(fileWithData.readAll());
         fileWithData.close();
     }
     else
