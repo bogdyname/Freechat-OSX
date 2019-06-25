@@ -3,18 +3,17 @@
 ***Contact: bogdyname@gmail.com
 */
 
-/*
-***Copyleft (C) 2019 Softwater, Inc
-***Contact: bogdyname@gmail.com
-*/
-
-#include "username.h"
+#include "User/username.h"
 #include "datasave.h"
-#include "freechat.h"
+#include "User/freechat.h"
 
 Datasave::Datasave(QObject *parent)
-    : QFile(parent)
+    : Username(parent)
 {
+    //HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
+    //HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
+    //HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
+
    connect( , SIGNAL(RunTimeIsOver()),
             this, SLOT(RunBackupFiles()));
    connect( , SIGNAL(SaveDataFileAs()),
