@@ -4,7 +4,8 @@
 */
 
 #include <QtWidgets>
-#include "User/freechat.h"
+#include "Bin/freechat.h"
+#include "Network/connectionf2f.h"
 
 using namespace Qt;
 
@@ -16,13 +17,9 @@ Freechat::Freechat(QWidget *parent)
     lineForTypeText->setFocusPolicy(StrongFocus);
     textFieldForViewMessages->setFocusPolicy(NoFocus);
     textFieldForViewMessages->setReadOnly(true);
-    listWithNicknameOfUser->setFocusPolicy(NoFocus);
-    listViewWithNetworkData->setReadOnly(true);
+    listWithIpOfUsers->setFocusPolicy(NoFocus);
 
-    //HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
-    //HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
-    //HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
+    connect(&showNetworkInfo, SIGNAL(), SLOT());
+
 }
-//HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
-//HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
-//HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
+
