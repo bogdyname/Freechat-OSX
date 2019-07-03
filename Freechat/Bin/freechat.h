@@ -6,7 +6,7 @@
 #ifndef FREECHAT_H
 #define FREECHAT_H
 
-#include "User/username.h"
+#include "User/bin.h"
 #include "ui_freechat.h"
 #include <QTextTableFormat>
 #include <QDialog>

@@ -4,7 +4,7 @@
 */
 
 #include "ui_freechat.h"
-#include "User/username.h"
+#include "User/bin.h"
 #include <QStorageInfo>
 #include <QDateTime>
 #include <QTimer>

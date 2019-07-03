@@ -24,20 +24,27 @@ CONFIG += app_bundle
 CONFIG += qt
 
 SOURCES += \
+        Bin/bin.cpp \
         Network/connectionf2f.cpp \
+        Network/cryptography.cpp \
+        Network/cryptography.cpp \
+        Network/firewall.cpp \
+        Network/firewall.cpp \
         main.cpp \
-        User/freechat.cpp \
-        Data/datasave.cpp \
-        User/username.cpp
+        Bin/freechat.cpp \
+        Data/datasave.cpp
 
 HEADERS += \
+        Bin/bin.h \
         Network/connectionf2f.h \
-        User/freechat.h \
+        Bin/freechat.h \
         Data/datasave.h \
-        User/username.h
+        Network/cryptography.h \
+        Network/cryptography.h \
+        Network/firewall.h \
+        Network/firewall.h
 
 FORMS += \
-        Designer/username.ui \
         Designer/freechat.ui
 
 # Default rules for deployment.

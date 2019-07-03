@@ -3,7 +3,7 @@
 ***Contact: bogdyname@gmail.com
 */
 
-#include "User/username.h"
+#include "User/bin.h"
 #include "datasave.h"
 #include "User/freechat.h"
 

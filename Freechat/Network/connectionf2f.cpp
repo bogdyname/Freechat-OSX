@@ -13,15 +13,24 @@ ConnectionF2F::ConnectionF2F(QObject *parent)
 
 /////////////////////////////////////////////////////
 
+Peerout::Peerout()
+{
+    connect(socket, SIGNAL(Connected()), this, SLOT(Connected()));
+    connect(socket, SIGNAL(DoConnect()), this, SLOT(DoConnect()));
+    connect(socket, SIGNAL(ReadyRead()), this, SLOT(ReadyRead()));
+    connect(socket, SIGNAL(BytesWrittenOfData(qint64)), this, SLOT(BytesWrittenOfData(qint64)));
+}
+
 Peerout::~Peerout()
 {
     delete socket;
 }
 
-void Peerout::MakeSocket()
+void Peerout::DoConnect()
 {
     GetIpAddressFromWAN(strWANip);
     socket = new QTcpSocket(this);
+
     socket->connectToHost(strWANip, 80);
 
         if(socket->waitForConnected(3000))
@@ -41,6 +50,35 @@ void Peerout::MakeSocket()
         {
             qDebug() << "Not connected!";
         }
+
+        return;
+}
+
+void Peerout::BytesWrittenOfData(qint64 bytes)
+{
+    qDebug() << bytes << " bytes written...";
+
+    return;
+}
+
+void Peerout::Connected()
+{
+
+    return;
+}
+
+void Peerout::Disconnected()
+{
+
+    return;
+}
+
+void Peerout::ReadyRead()
+{
+    qDebug() << "reading...";
+    qDebug() << socket->readAll();
+
+    return;
 }
 
 void Peerout::GetIpAddressFromWAN(QString &textWithIPAddres)
