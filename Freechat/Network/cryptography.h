@@ -7,11 +7,10 @@
 
 #ifndef CRYPTOGRAPHY_H
 #define CRYPTOGRAPHY_H
-
 using namespace QSsl;
 using namespace QPasswordDigestor;
 
-class Cryptography
+class Cryptography : private ConnectionF2F
 {
     Q_OBJECT
 
@@ -24,5 +23,4 @@ public:
 private:
     friend class ConnectionF2F;
 };
-
-#endif // CRYPTOGRAPHY_H
+#endif

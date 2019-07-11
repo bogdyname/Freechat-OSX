@@ -3,14 +3,13 @@
 ***Contact: bogdyname@gmail.com
 */
 
-#ifndef FREECHAT_H
-#define FREECHAT_H
-
-#include "User/bin.h"
+#include "Bin/bin.h"
 #include "ui_freechat.h"
 #include <QTextTableFormat>
 #include <QDialog>
 
+#ifndef FREECHAT_H
+#define FREECHAT_H
 class Freechat : public QDialog, private Ui::Freechat
 {
     Q_OBJECT
@@ -18,5 +17,4 @@ class Freechat : public QDialog, private Ui::Freechat
 public:
     Freechat(QWidget *parent = nullptr);
 };
-
-#endif // FREECHAT_H
+#endif

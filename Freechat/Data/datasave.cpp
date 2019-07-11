@@ -3,17 +3,13 @@
 ***Contact: bogdyname@gmail.com
 */
 
-#include "User/bin.h"
+#include "Bin/bin.h"
 #include "datasave.h"
-#include "User/freechat.h"
+#include "Bin/freechat.h"
 
 Datasave::Datasave(QObject *parent)
-    : Username(parent)
+    : QFile(parent)
 {
-    //HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
-    //HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
-    //HEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHEREHERE
-
    connect( , SIGNAL(RunTimeIsOver()),
             this, SLOT(RunBackupFiles()));
    connect( , SIGNAL(SaveDataFileAs()),
