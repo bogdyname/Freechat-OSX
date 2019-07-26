@@ -29,11 +29,7 @@ SOURCES += \
         Network/connectionf2f.cpp \
         Network/cryptography.cpp \
         Network/cryptography.cpp \
-        Network/firewall.cpp \
-        Network/firewall.cpp \
         Network/peerin.cpp \
-        Network/peerin.cpp \
-        Network/peerout.cpp \
         Network/peerout.cpp \
         main.cpp \
         Bin/freechat.cpp \
@@ -47,11 +43,7 @@ HEADERS += \
         Data/datasave.h \
         Network/cryptography.h \
         Network/cryptography.h \
-        Network/firewall.h \
-        Network/firewall.h \
         Network/peerin.h \
-        Network/peerin.h \
-        Network/peerout.h \
         Network/peerout.h
 
 FORMS += \

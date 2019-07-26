@@ -3,10 +3,11 @@
 ***Contact: bogdyname@gmail.com
 */
 
-#include "Network/connectionf2f.h"
-
 #ifndef CRYPTOGRAPHY_H
 #define CRYPTOGRAPHY_H
+
+#include "Network/connectionf2f.h"
+
 using namespace QSsl;
 using namespace QPasswordDigestor;
 

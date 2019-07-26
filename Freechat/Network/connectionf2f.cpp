@@ -10,7 +10,7 @@
 ConnectionF2F::ConnectionF2F(QObject *parent)
     : QTcpSocket(parent)
 {
-    Peerout connecting;
+
 }
 
 void ConnectionF2F::PassOnWANIp(QString &buffer)
@@ -36,7 +36,9 @@ void ConnectionF2F::GetIpAddressFromWAN(QString &textWithIPAddres)
         {
             if(reply->error() != QNetworkReply::NoError)
             {
+                #ifndef Q_DEBUG
                 qDebug() << "error: " << reply->error();
+                #endif
             }
             else
             {
@@ -52,4 +54,3 @@ void ConnectionF2F::GetIpAddressFromWAN(QString &textWithIPAddres)
 
         return;
 }
-

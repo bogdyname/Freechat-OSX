@@ -1,8 +1,3 @@
-/*
-***Copyleft (C) 2019 Softwater, Inc
-***Contact: bogdyname@gmail.com
-*/
-
 #include "peerin.h"
 
 Peerin::Peerin()
@@ -10,7 +5,7 @@ Peerin::Peerin()
     connect(&showNetworkInfo, SIGNAL(ShowWANIpForUser()), this, SLOT(PassOnMyIpAddress()));
 }
 
-void Peerinside::PassOnMyIpAddress()
+void Peerin::PassOnMyIpAddress()
 {
     PassOnWANIp(strPassOnWANip);
 

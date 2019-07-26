@@ -3,46 +3,44 @@
 ***Contact: bogdyname@gmail.com
 */
 
-#include "ui_freechat.h"
-#include "Bin/bin.h"
+#ifndef DATASAVE_H
+#define DATASAVE_H
+
+#include "Bin/freechat.h"
+#include "Network/connectionf2f.h"
 #include <QStorageInfo>
 #include <QDateTime>
 #include <QTimer>
 #include <QFile>
 
-#ifndef DATASAVE_H
-#define DATASAVE_H
-class Username;
-class Freechat;
-class Datasave : public QFile
+class Datasave : public QFile,
+private ConnectionF2F, private Freechat
 {
     Q_OBJECT
 
 private:
-    QTimer *runTimer = nullptr;
     QByteArray *buffer = nullptr;
-
     QStorageInfo storage = QStorageInfo::root();
 
 public:
     ~Datasave();
-    Datasave(QObject *parent = nullptr);
-    Datasave(Datasave &&MoveSource, QFile &fileWithDataForBackup);
+    Datasave(Freechat *parent = nullptr);
     Datasave(QFile &fileWithData, QFile &fileWithDataForBackup);
 
 signals:
-    void SaveDataFileAs();
     void CheckYourMemorySize();
-    inline void RunTimeIsOver();
     void ReadFileForViewMessages();
-    void CheckUsernameForSaveFile();
+    void ChooseFileWithData(QFile &fileWithData);
 
-public slots:
+private slots:
     inline void DeleteAllDataForFreeMemory(QFile &fileWithData, QFile &fileWithDataForBackup);
     void RunBackupFiles(QFile &fileWithData, QFile &fileWithDataForBackup);
     inline void ReadFile(QFile &fileWithData);
+    void OpenFile(QFile &fileWithData);
 
 private:
-    void RSAMODULE();
+    void RSAMODULE(QFile &fileWithData);
+    inline bool CheckIpAddressForSaveFile(QString &strWithIpOfPeer);
+    inline QString ReadFirstStringFromDataFile(QString &strWithIpOfPeer);
 };
 #endif
