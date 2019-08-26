@@ -37,3 +37,4 @@ private:
     void GetIpAddressFromWAN(QString &textWithIPAddres);
 };
 #endif
+
