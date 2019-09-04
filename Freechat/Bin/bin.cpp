@@ -19,75 +19,41 @@ Bin::~Bin()
 
 }
 
-void Bin::WriteInNickNameListOfPeers(const QString &nickname)
+template <typename Wcontainer>
+Wcontainer Bin::WriteElementsInList(Wcontainer &list, const QString &element)
 {
-    listWithNickName << nickname;
+    list << element;
 
     return;
 }
 
-void Bin::WriteInIpListOfPeers(const QString &ip)
+template <typename Gcontainer>
+Gcontainer Bin::GetElementsFromList(Gcontainer &list)
 {
-    listWithIpAddress << ip;
+    QList<QString>::const_iterator it = list.constBegin();
 
-    return;
-}
-
-void Bin::GetElementFromIpList()
-{
-    QList<QString>::const_iterator it = listWithIpAddress.constBegin();
-
-    for(; it != listWithIpAddress.end(); ++it)
+    for(; it != list.end(); ++it)
     {
         #ifndef Q_DEBUG
-        qDebug() << "Element from IP list: " << *it << endl;
+        qDebug() << "Element from list: " << *it << endl;
         #endif
     }
 
     return;
 }
 
-void Bin::GetElementFromNickNameList()
+template <typename Rcontainer>
+Rcontainer Bin::RemoveElementsFromList(Rcontainer &list)
 {
-    QList<QString>::const_iterator it = listWithNickName.constBegin();
+    QList<QString>::iterator it = list.begin();
 
-    for(; it != listWithNickName.end(); ++it)
+    for(; it != list.end(); ++it)
     {
         #ifndef Q_DEBUG
-        qDebug() << "Element from Nickname list: " << *it << endl;
-        #endif
-    }
-
-    return;
-}
-
-void Bin::RemoveFromIpLIst()
-{
-    QList<QString>::iterator it = listWithIpAddress.begin();
-
-    for(; it != listWithIpAddress.end(); ++it)
-    {
-        #ifndef Q_DEBUG
-        qDebug() << "Deleted element from Nickname list: " << *it << endl;
+        qDebug() << "Deleted element from list: " << *it << endl;
         #endif
 
-        //listWithIpAddress.erase(*it);
-    }
-
-    return;
-}
-
-void Bin::RemoveFromNickNameList()
-{
-    QList<QString>::iterator it = listWithNickName.begin();
-
-    for(; it != listWithNickName.end(); ++it)
-    {
-        #ifndef Q_DEBUG
-        qDebug() << "Deleted element from Nickname list: " << *it << endl;
-        #endif
-
-        //listWithNickName.erase(*it);
+        //list.erase(*it);
     }
 
     return;
