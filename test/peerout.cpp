@@ -41,12 +41,14 @@ Peerout::~Peerout()
 
 void Peerout::DoConnect()
 {
-    socketwan->connectToHost(wanIP, 80);
+    socketwan->connectToHost("92.243.182.174", 80);
 
-    if((socketwan->state() == QTcpSocket::ConnectedState)
+    if((socketlan->waitForConnected(10000))
+        && (socketwan->state() == QTcpSocket::ConnectedState)
             && socketwan->waitForConnected())
     {
-        socketlan->connectToHost(lanIP, 80);
+        Connected();
+        socketlan->connectToHost("192.168.1.15", 80);
 
         if((socketwan->state() == QTcpSocket::ConnectedState)
            && (socketlan->state() == QTcpSocket::ConnectedState)
@@ -55,6 +57,7 @@ void Peerout::DoConnect()
             Connected();
 
             socketlan->write("DATA OF TEXT");
+            socketlan->flush();
             socketlan->waitForBytesWritten(1000);
             socketlan->waitForReadyRead(3000);
             #ifndef Q_DEBUG
@@ -70,6 +73,12 @@ void Peerout::DoConnect()
             qDebug() << "Not connected!";
             #endif
         }
+    }
+    else
+    {
+        #ifndef Q_DEBUG
+        qDebug() << "Not connected!";
+        #endif
     }
 
         return;

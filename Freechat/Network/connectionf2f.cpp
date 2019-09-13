@@ -12,3 +12,26 @@ ConnectionF2F::ConnectionF2F(QObject *parent)
 {
 
 }
+
+void ConnectionF2F::WriteIpAddressOfPeer()
+{
+    auto list = QHostInfo::fromName(QHostInfo::localHostName()).addresses();
+
+    #ifndef Q_DEBUG
+    qDebug() << "Addresses: " << list << endl;
+    #endif
+
+    return;
+}
+
+void ConnectionF2F::OpenConnectingToPortPeer()
+{
+
+    return;
+}
+
+void ConnectionF2F::OpenDisconnectingFromPortPeer()
+{
+
+    return;
+}

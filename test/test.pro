@@ -19,11 +19,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     freechat.cpp \
-    peerin.cpp
+    peerin.cpp \
+    peerout.cpp
 
 HEADERS += \
     freechat.h \
-    peerin.h
+    peerin.h \
+    peerout.h
 
 FORMS += \
     freechat.ui
