@@ -6,10 +6,9 @@
 #ifndef PEEROUT
 #define PEEROUT
 
-#include "Network/connectionf2f.h"
-#include "Bin/freechat.h"
+#include <QtNetwork>
 
-class Peerout : public ConnectionF2F
+class Peerout : public QTcpSocket
 {
     Q_OBJECT
 

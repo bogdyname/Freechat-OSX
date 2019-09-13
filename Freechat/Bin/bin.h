@@ -6,8 +6,10 @@
 #ifndef BIN_H
 #define BIN_H
 
-#include <QString>
 #include <QList>
+#include <QString>
+#include <iostream>
+#include <algorithm>
 
 class Bin : public QObject
 {
@@ -21,6 +23,11 @@ private:
 public:
     ~Bin();
     Bin(QObject *parent = nullptr);
+
+public:
+    void AddPeer(QString &nickname, QString &Lanip, QString &Wanip);
+    void DeletePeer();
+    void GetNickname(QList<QString> &nick);
 
 private:
     template <typename Wcontainer>

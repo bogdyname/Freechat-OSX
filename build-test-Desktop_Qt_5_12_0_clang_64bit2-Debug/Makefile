@@ -52,13 +52,17 @@ OBJECTS_DIR   = ./
 
 SOURCES       = ../test/main.cpp \
 		../test/freechat.cpp \
-		../test/peerin.cpp moc_freechat.cpp \
-		moc_peerin.cpp
+		../test/peerin.cpp \
+		../test/peerout.cpp moc_freechat.cpp \
+		moc_peerin.cpp \
+		moc_peerout.cpp
 OBJECTS       = main.o \
 		freechat.o \
 		peerin.o \
+		peerout.o \
 		moc_freechat.o \
-		moc_peerin.o
+		moc_peerin.o \
+		moc_peerout.o
 DIST          = ../../Qt/5.12.0/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.12.0/clang_64/mkspecs/qdevice.pri \
 		../../Qt/5.12.0/clang_64/mkspecs/features/device_config.prf \
@@ -204,6 +208,7 @@ DIST          = ../../Qt/5.12.0/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf \
+		../test/.qmake.stash \
 		../../Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf \
 		../../Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf \
@@ -232,9 +237,11 @@ DIST          = ../../Qt/5.12.0/clang_64/mkspecs/features/spec_pre.prf \
 		../../Qt/5.12.0/clang_64/mkspecs/features/yacc.prf \
 		../../Qt/5.12.0/clang_64/mkspecs/features/lex.prf \
 		../test/test.pro ../test/freechat.h \
-		../test/peerin.h ../test/main.cpp \
+		../test/peerin.h \
+		../test/peerout.h ../test/main.cpp \
 		../test/freechat.cpp \
-		../test/peerin.cpp
+		../test/peerin.cpp \
+		../test/peerout.cpp
 QMAKE_TARGET  = test
 DESTDIR       = 
 TARGET        = test.app/Contents/MacOS/test
@@ -401,6 +408,7 @@ Makefile: ../test/test.pro ../../Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.con
 		../../Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf \
 		../../Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf \
 		../../Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf \
@@ -579,6 +587,7 @@ Makefile: ../test/test.pro ../../Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.con
 ../../Qt/5.12.0/clang_64/mkspecs/features/qt_config.prf:
 ../../Qt/5.12.0/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../Qt/5.12.0/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../Qt/5.12.0/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../Qt/5.12.0/clang_64/mkspecs/features/mac/sdk.prf:
 ../../Qt/5.12.0/clang_64/mkspecs/features/toolchain.prf:
@@ -641,8 +650,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../test/freechat.h ../test/peerin.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../test/main.cpp ../test/freechat.cpp ../test/peerin.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../test/freechat.h ../test/peerin.h ../test/peerout.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../test/main.cpp ../test/freechat.cpp ../test/peerin.cpp ../test/peerout.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../test/freechat.ui $(DISTDIR)/
 
 
@@ -653,6 +662,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r test.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -674,9 +684,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -g -std=gnu++11 $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk -mmacosx-version-min=10.12 -Wall -W -dM -E -o moc_predefs.h ../../Qt/5.12.0/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_freechat.cpp moc_peerin.cpp
+compiler_moc_header_make_all: moc_freechat.cpp moc_peerin.cpp moc_peerout.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_freechat.cpp moc_peerin.cpp
+	-$(DEL_FILE) moc_freechat.cpp moc_peerin.cpp moc_peerout.cpp
 moc_freechat.cpp: ../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../test/freechat.h \
@@ -741,6 +751,54 @@ moc_peerin.cpp: ../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QTcpSer
 		../../Qt/5.12.0/clang_64/bin/moc
 	/Users/user/Qt/5.12.0/clang_64/bin/moc $(DEFINES) --include /Users/user/Freechat-OSX/build-test-Desktop_Qt_5_12_0_clang_64bit2-Debug/moc_predefs.h -I/Users/user/Qt/5.12.0/clang_64/mkspecs/macx-clang -I/Users/user/Freechat-OSX/test -I/Users/user/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/user/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers -I/Users/user/Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/user/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.1/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/user/Qt/5.12.0/clang_64/lib ../test/peerin.h -o moc_peerin.cpp
 
+moc_peerout.cpp: ../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QtNetwork \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtnetworkglobal.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qabstractnetworkcache.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qabstractsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qdnslookup.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qdtls.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhostaddress.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhostinfo.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhstspolicy.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhttpmultipart.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qlocalserver.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qlocalsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkconfigmanager.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkconfiguration.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkcookie.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkcookiejar.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkdatagram.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkdiskcache.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkinterface.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworksession.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qpassworddigestor.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsctpserver.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsctpsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qssl.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslcertificate.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslcertificateextension.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslcipher.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslconfiguration.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qssldiffiehellmanparameters.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslellipticcurve.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslerror.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslkey.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslpresharedkeyauthenticator.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qudpsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtnetworkversion.h \
+		../test/peerout.h \
+		moc_predefs.h \
+		../../Qt/5.12.0/clang_64/bin/moc
+	/Users/user/Qt/5.12.0/clang_64/bin/moc $(DEFINES) --include /Users/user/Freechat-OSX/build-test-Desktop_Qt_5_12_0_clang_64bit2-Debug/moc_predefs.h -I/Users/user/Qt/5.12.0/clang_64/mkspecs/macx-clang -I/Users/user/Freechat-OSX/test -I/Users/user/Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers -I/Users/user/Qt/5.12.0/clang_64/lib/QtGui.framework/Headers -I/Users/user/Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers -I/Users/user/Qt/5.12.0/clang_64/lib/QtCore.framework/Headers -I. -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/10.0.1/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include -F/Users/user/Qt/5.12.0/clang_64/lib ../test/peerout.h -o moc_peerout.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -767,29 +825,16 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_ui
 main.o: ../test/main.cpp ../test/freechat.h \
 		../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
-		../test/peerin.h \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QTcpServer \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QNetworkInterface \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkinterface.h \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QAbstractSocket \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qabstractsocket.h \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QNetworkSession \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworksession.h \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QHostAddress \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhostaddress.h \
-		../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTimerEvent \
-		../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qcoreevent.h \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QHostInfo \
-		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhostinfo.h \
+		../test/peerout.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QtNetwork \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtnetworkglobal.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qabstractnetworkcache.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qabstractsocket.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qdnslookup.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qdtls.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhostaddress.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhostinfo.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhstspolicy.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhttpmultipart.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qlocalserver.h \
@@ -801,9 +846,11 @@ main.o: ../test/main.cpp ../test/freechat.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkcookiejar.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkdatagram.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkdiskcache.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkinterface.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworksession.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qpassworddigestor.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsctpserver.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsctpsocket.h \
@@ -818,8 +865,20 @@ main.o: ../test/main.cpp ../test/freechat.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslkey.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslpresharedkeyauthenticator.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qudpsocket.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtnetworkversion.h \
+		../test/peerin.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QTcpServer \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QNetworkInterface \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QAbstractSocket \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QNetworkSession \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QHostAddress \
+		../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/QTimerEvent \
+		../../Qt/5.12.0/clang_64/lib/QtCore.framework/Headers/qcoreevent.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QTcpSocket \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QHostInfo \
 		../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		../../Qt/5.12.0/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../test/main.cpp
@@ -885,11 +944,60 @@ peerin.o: ../test/peerin.cpp ../test/peerin.h \
 		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtnetworkversion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o peerin.o ../test/peerin.cpp
 
+peerout.o: ../test/peerout.cpp ../test/peerout.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/QtNetwork \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtnetworkglobal.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qabstractnetworkcache.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qabstractsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qauthenticator.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qdnslookup.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qdtls.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhostaddress.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhostinfo.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhstspolicy.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qhttpmultipart.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qlocalserver.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qlocalsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkaccessmanager.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkconfigmanager.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkconfiguration.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkcookie.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkcookiejar.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkdatagram.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkdiskcache.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkinterface.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkproxy.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkreply.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworkrequest.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qnetworksession.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qpassworddigestor.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsctpserver.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsctpsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qssl.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslcertificate.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslcertificateextension.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslcipher.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslconfiguration.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qssldiffiehellmanparameters.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslellipticcurve.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslerror.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslkey.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslpresharedkeyauthenticator.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qsslsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtcpserver.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtcpsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qudpsocket.h \
+		../../Qt/5.12.0/clang_64/lib/QtNetwork.framework/Headers/qtnetworkversion.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o peerout.o ../test/peerout.cpp
+
 moc_freechat.o: moc_freechat.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_freechat.o moc_freechat.cpp
 
 moc_peerin.o: moc_peerin.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_peerin.o moc_peerin.cpp
+
+moc_peerout.o: moc_peerout.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_peerout.o moc_peerout.cpp
 
 ####### Install
 
