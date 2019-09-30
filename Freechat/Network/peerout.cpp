@@ -5,33 +5,28 @@
 
 #include "peerout.h"
 
-Peerout::Peerout()
+Peerout::Peerout(const QString &ipHost)
+    : nextBlockSize(0)
 {
-    socketlan = new QTcpSocket(this);
-    socketwan = new QTcpSocket(this);
+    socket = new QTcpSocket(this);
 
     #ifndef Q_DEBUG
-    qDebug() << "A new LAN socket created.";
-    qDebug() << "A new WAN socket created.";
+    qDebug() << "A new socket created.";
     #endif
 
-    connect(socketlan, SIGNAL(connected()), this, SLOT(Connected()));
-    connect(socketlan, SIGNAL(disconnected()), this, SLOT(Disconnected()));
-    connect(socketlan, SIGNAL(readyRead()), this, SLOT(ReadyRead()));
-    connect(socketlan, SIGNAL(bytesWritten(qint64)), this, SLOT(BytesWrittenOfData(qint64)));
+    socket->connectToHost(ipHost, 3366);
 
-    connect(socketwan, SIGNAL(connected()), this, SLOT(Connected()));
-    connect(socketwan, SIGNAL(disconnected()), this, SLOT(Disconnected()));
-    connect(socketwan, SIGNAL(readyRead()), this, SLOT(ReadyRead()));
-    connect(socketwan, SIGNAL(bytesWritten(qint64)), this, SLOT(BytesWrittenOfData(qint64)));
+    connect(socket, SIGNAL(connected()), this, SLOT(SlotConnected()));
+    connect(socket, SIGNAL(readyRead()), this, SLOT(SlotReadyRead()));
+    connect(socket, SIGNAL(error(QAbstractSocket::SocketError)),
+            this, SLOT(slotError(QAbstractSocket::SocketError)));
 }
 
 Peerout::~Peerout()
 {
-    if((socketlan != nullptr) && (socketwan != nullptr))
+    if(socket != nullptr)
     {
-        delete socketlan;
-        delete socketwan;
+        delete socket;
     }
     else
     {
@@ -39,75 +34,85 @@ Peerout::~Peerout()
     }
 }
 
-void Peerout::DoConnect()
+void Peerout::SlotReadyRead()
 {
-    socketwan->connectToHost(wanIP, 80);
+    QDataStream in(socket);
+    in.setVersion(QDataStream::Qt_5_12);
 
-    if((socketwan->state() == QTcpSocket::ConnectedState)
-            && socketwan->waitForConnected())
+    for(;;)
     {
-        socketlan->connectToHost(lanIP, 80);
-
-        if((socketwan->state() == QTcpSocket::ConnectedState)
-           && (socketlan->state() == QTcpSocket::ConnectedState)
-                && (socketlan->waitForConnected(3000)))
+        if(!nextBlockSize)
         {
-            Connected();
+            if((socket->bytesAvailable() < (sizeof (quint16))))
+            {
+                    break;
+            }
+            else
+            {
+                /*clear code*/
+            }
 
-            socketlan->write("DATA OF TEXT");
-            socketlan->waitForBytesWritten(1000);
-            socketlan->waitForReadyRead(3000);
-            #ifndef Q_DEBUG
-            qDebug() << "Reading: " << socketlan->bytesAvailable();
-            qDebug() << socketlan->readAll();
-            #endif
-
-            socketlan->close();
+            in >> nextBlockSize;
         }
         else
         {
-            #ifndef Q_DEBUG
-            qDebug() << "Not connected!";
-            #endif
+            /*clear code*/
         }
+
+        if((socket->bytesAvailable() < nextBlockSize))
+        {
+            break;
+        }
+        else
+        {
+             /*clear code*/
+        }
+
+        QTime time;
+        QString str;
+        in >> time >> str;
+
+        Freechat::globalBuffer.append(time.toString() + " " + str);
+        nextBlockSize = 0;
     }
 
-        return;
+    return;
 }
 
-void Peerout::BytesWrittenOfData(qint64 &bytes)
+void Peerout::SlotError(QAbstractSocket::SocketError err)
 {
-    #ifndef Q_DEBUG
-    qDebug() << bytes << " bytes written...";
-    #endif
+    QString strError =
+            "Error: " + (err == QAbstractSocket::HostNotFoundError ?
+                         "The host was not found." :
+                         err == QAbstractSocket::RemoteHostClosedError ?
+                         "The remote host is closed." :
+                         err == QAbstractSocket::ConnectionRefusedError ?
+                         "The connection was refused." :
+                         QString(socket->errorString()));
+
+    Freechat::globalBuffer.append(strError);
 
     return;
 }
 
-void Peerout::Connected()
+void Peerout::SlotSendToServer()
 {
-    #ifndef Q_DEBUG
-    qDebug() << "Connected!";
-    #endif
+    QByteArray block;
+    QDataStream out(&block, QIODevice::WriteOnly);
+    out.setVersion(QDataStream::Qt_5_12);
+    out << quint16(0) << QTime::currentTime() << Freechat::globalBuffer;
+
+    out.device()->seek(0);
+    out << quint16(block.size() - sizeof(quint16));
+
+    socket->write(block);
 
     return;
 }
 
-void Peerout::Disconnected()
+void Peerout::SlotConnected()
 {
-    #ifndef Q_DEBUG
-    qDebug() << "Disconnected!";
-    #endif
-
-    return;
-}
-
-void Peerout::ReadyRead()
-{
-    #ifndef Q_DEBUG
-    qDebug() << "reading...";
-    qDebug() << socketlan->readAll();
-    #endif
+    Freechat::globalBuffer.append("Connected!");
 
     return;
 }
