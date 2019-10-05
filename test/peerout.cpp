@@ -5,6 +5,15 @@
 
 #include "peerout.h"
 
+extern QString globalBuffer;
+extern QString viewField;
+
+extern QString yourIp;
+extern QString lanIpOfPeer;
+extern QString wanIpOfPeer;
+extern QString nickNameOfPeer;
+extern QString bufferOfMessages;
+
 Peerout::Peerout()
 {
     socketlan = new QTcpSocket(this);
