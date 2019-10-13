@@ -1,18 +1,21 @@
-#include "freechat.h"
-#include "peerout.h"
-#include "peerin.h"
-
+#include "Bin/freechat.h"
+#include "Network/connectionf2f.h"
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    Freechat w;
-    w.show();
 
-    Peerin testServer; // CONNECTING WORK!
-    Peerout testConnection;
-    testConnection.DoConnect();
+    // network
+    ConnectionF2F networkTest;
+    networkTest.NetworkInfo();
+
+    Peerout peer("192.168.1.15");
+    Peerin server(3366);
+
+    // ui
+    Freechat window;
+    window.show();
 
     return a.exec();
 }

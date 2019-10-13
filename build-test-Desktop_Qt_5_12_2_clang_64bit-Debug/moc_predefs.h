@@ -142,10 +142,10 @@
 #define __INT_FAST32_FMTi__ "i"
 #define __INT_FAST32_MAX__ 2147483647
 #define __INT_FAST32_TYPE__ int
-#define __INT_FAST64_FMTd__ "ld"
-#define __INT_FAST64_FMTi__ "li"
-#define __INT_FAST64_MAX__ 9223372036854775807L
-#define __INT_FAST64_TYPE__ long int
+#define __INT_FAST64_FMTd__ "lld"
+#define __INT_FAST64_FMTi__ "lli"
+#define __INT_FAST64_MAX__ 9223372036854775807LL
+#define __INT_FAST64_TYPE__ long long int
 #define __INT_FAST8_FMTd__ "hhd"
 #define __INT_FAST8_FMTi__ "hhi"
 #define __INT_FAST8_MAX__ 127
@@ -158,10 +158,10 @@
 #define __INT_LEAST32_FMTi__ "i"
 #define __INT_LEAST32_MAX__ 2147483647
 #define __INT_LEAST32_TYPE__ int
-#define __INT_LEAST64_FMTd__ "ld"
-#define __INT_LEAST64_FMTi__ "li"
-#define __INT_LEAST64_MAX__ 9223372036854775807L
-#define __INT_LEAST64_TYPE__ long int
+#define __INT_LEAST64_FMTd__ "lld"
+#define __INT_LEAST64_FMTi__ "lli"
+#define __INT_LEAST64_MAX__ 9223372036854775807LL
+#define __INT_LEAST64_TYPE__ long long int
 #define __INT_LEAST8_FMTd__ "hhd"
 #define __INT_LEAST8_FMTi__ "hhi"
 #define __INT_LEAST8_MAX__ 127
@@ -300,12 +300,12 @@
 #define __UINT_FAST32_FMTx__ "x"
 #define __UINT_FAST32_MAX__ 4294967295U
 #define __UINT_FAST32_TYPE__ unsigned int
-#define __UINT_FAST64_FMTX__ "lX"
-#define __UINT_FAST64_FMTo__ "lo"
-#define __UINT_FAST64_FMTu__ "lu"
-#define __UINT_FAST64_FMTx__ "lx"
-#define __UINT_FAST64_MAX__ 18446744073709551615UL
-#define __UINT_FAST64_TYPE__ long unsigned int
+#define __UINT_FAST64_FMTX__ "llX"
+#define __UINT_FAST64_FMTo__ "llo"
+#define __UINT_FAST64_FMTu__ "llu"
+#define __UINT_FAST64_FMTx__ "llx"
+#define __UINT_FAST64_MAX__ 18446744073709551615ULL
+#define __UINT_FAST64_TYPE__ long long unsigned int
 #define __UINT_FAST8_FMTX__ "hhX"
 #define __UINT_FAST8_FMTo__ "hho"
 #define __UINT_FAST8_FMTu__ "hhu"
@@ -324,12 +324,12 @@
 #define __UINT_LEAST32_FMTx__ "x"
 #define __UINT_LEAST32_MAX__ 4294967295U
 #define __UINT_LEAST32_TYPE__ unsigned int
-#define __UINT_LEAST64_FMTX__ "lX"
-#define __UINT_LEAST64_FMTo__ "lo"
-#define __UINT_LEAST64_FMTu__ "lu"
-#define __UINT_LEAST64_FMTx__ "lx"
-#define __UINT_LEAST64_MAX__ 18446744073709551615UL
-#define __UINT_LEAST64_TYPE__ long unsigned int
+#define __UINT_LEAST64_FMTX__ "llX"
+#define __UINT_LEAST64_FMTo__ "llo"
+#define __UINT_LEAST64_FMTu__ "llu"
+#define __UINT_LEAST64_FMTx__ "llx"
+#define __UINT_LEAST64_MAX__ 18446744073709551615ULL
+#define __UINT_LEAST64_TYPE__ long long unsigned int
 #define __UINT_LEAST8_FMTX__ "hhX"
 #define __UINT_LEAST8_FMTo__ "hho"
 #define __UINT_LEAST8_FMTu__ "hhu"
@@ -337,7 +337,7 @@
 #define __UINT_LEAST8_MAX__ 255
 #define __UINT_LEAST8_TYPE__ unsigned char
 #define __USER_LABEL_PREFIX__ _
-#define __VERSION__ "4.2.1 Compatible Apple LLVM 10.0.1 (clang-1001.0.46.4)"
+#define __VERSION__ "4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.8)"
 #define __WCHAR_MAX__ 2147483647
 #define __WCHAR_TYPE__ int
 #define __WCHAR_WIDTH__ 32
@@ -346,37 +346,63 @@
 #define __WINT_WIDTH__ 32
 #define __amd64 1
 #define __amd64__ 1
-#define __apple_build_version__ 10010046
+#define __apple_build_version__ 11000033
 #define __block __attribute__((__blocks__(byref)))
 #define __clang__ 1
-#define __clang_major__ 10
+#define __clang_major__ 11
 #define __clang_minor__ 0
-#define __clang_patchlevel__ 1
-#define __clang_version__ "10.0.1 (clang-1001.0.46.4)"
+#define __clang_patchlevel__ 0
+#define __clang_version__ "11.0.0 (clang-1100.0.33.8)"
+#define __code_model_small_ 1
 #define __core2 1
 #define __core2__ 1
-#define __cplusplus 201103L
+#define __cplusplus 201703L
+#define __cpp_aggregate_bases 201603L
+#define __cpp_aggregate_nsdmi 201304L
 #define __cpp_alias_templates 200704L
 #define __cpp_attributes 200809L
-#define __cpp_constexpr 200704
+#define __cpp_binary_literals 201304L
+#define __cpp_capture_star_this 201603L
+#define __cpp_constexpr 201603L
 #define __cpp_decltype 200707L
+#define __cpp_decltype_auto 201304L
+#define __cpp_deduction_guides 201703L
 #define __cpp_delegating_constructors 200604L
+#define __cpp_digit_separators 201309L
+#define __cpp_enumerator_attributes 201411L
 #define __cpp_exceptions 199711L
+#define __cpp_fold_expressions 201603L
+#define __cpp_generic_lambdas 201304L
+#define __cpp_guaranteed_copy_elision 201606L
+#define __cpp_hex_float 201603L
+#define __cpp_if_constexpr 201606L
 #define __cpp_inheriting_constructors 201511L
+#define __cpp_init_captures 201304L
 #define __cpp_initializer_lists 200806L
+#define __cpp_inline_variables 201606L
 #define __cpp_lambdas 200907L
+#define __cpp_namespace_attributes 201411L
+#define __cpp_nested_namespace_definitions 201411L
+#define __cpp_noexcept_function_type 201510L
+#define __cpp_nontype_template_args 201411L
+#define __cpp_nontype_template_parameter_auto 201606L
 #define __cpp_nsdmi 200809L
-#define __cpp_range_based_for 200907
+#define __cpp_range_based_for 201603L
 #define __cpp_raw_strings 200710L
 #define __cpp_ref_qualifiers 200710L
+#define __cpp_return_type_deduction 201304L
 #define __cpp_rtti 199711L
 #define __cpp_rvalue_references 200610L
-#define __cpp_static_assert 200410
+#define __cpp_static_assert 201411L
+#define __cpp_structured_bindings 201606L
+#define __cpp_template_auto 201606L
 #define __cpp_threadsafe_static_init 200806L
 #define __cpp_unicode_characters 200704L
 #define __cpp_unicode_literals 200710L
 #define __cpp_user_defined_literals 200809L
+#define __cpp_variable_templates 201304L
 #define __cpp_variadic_templates 200704L
+#define __cpp_variadic_using 201611L
 #define __llvm__ 1
 #define __nonnull _Nonnull
 #define __null_unspecified _Null_unspecified
