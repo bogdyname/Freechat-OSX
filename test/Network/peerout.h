@@ -18,12 +18,20 @@ class Peerout : public QTcpSocket
     Q_OBJECT
 
 public:
+<<<<<<< HEAD
+    explicit Peerout();
+=======
     Peerout(const QString &ipHost);
+>>>>>>> master
     ~Peerout();
 
 public slots:
     void SlotReadyRead();
+<<<<<<< HEAD
+    void SlotConnected(QString &ipHost);
+=======
     void SlotConnected();
+>>>>>>> master
     void SlotSendToServer();
     void SlotError(QAbstractSocket::SocketError);
 

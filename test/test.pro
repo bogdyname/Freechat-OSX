@@ -1,10 +1,19 @@
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> master
 QT       += gui
 QT       += svg
 QT       += network
 QT       += core gui
 QT       += widgets
 
+<<<<<<< HEAD
+greaterThan(QT_MAJOR_VERSION, 5): QT += widgets
+=======
 greaterThan(QT_MAJOR_VERSION, 5.4): QT += widgets
+>>>>>>> master
 
 TARGET = test
 TEMPLATE = app

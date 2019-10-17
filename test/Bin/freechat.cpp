@@ -21,11 +21,58 @@ Freechat::Freechat(QWidget *parent)
 {
     ui->setupUi(this);
 
+<<<<<<< HEAD
+    QNetworkAccessManager nam;
+    QNetworkRequest req(QUrl("http://www.google.com"));
+    QNetworkReply *reply = nam.get(req);
+    QEventLoop loop;
+    connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
+
+    if(reply->bytesAvailable())
+    {
+        ui->writeNickOfPeer->setReadOnly(true);
+        ui->writeWanIpOfPeer->setReadOnly(true);
+        ui->writeLanIpOfPeer->setReadOnly(true);
+        ui->lineForTypeText->setReadOnly(true);
+    }
+    else
+    {
+        /*clear code*/
+    }
+
+    //ui->writeWanIpOfPeer->setInputMask("000.000.000.000");
+    //ui->writeLanIpOfPeer->setInputMask("000.000.000.000");
+
+    ui->writeNickOfPeer->setPlaceholderText("Write here nickname of peer");
+    ui->writeWanIpOfPeer->setPlaceholderText("Write here WAN IP of peer");
+    ui->writeLanIpOfPeer->setPlaceholderText("Write here LAN IP of peer");
+    ui->lineForTypeText->setPlaceholderText("Type here");
+
+    ui->writeNickOfPeer->setMaxLength(15);
+    ui->writeWanIpOfPeer->setMaxLength(15);
+    ui->writeLanIpOfPeer->setMaxLength(15);
+    ui->lineForTypeText->setMaxLength(200);
+
+    ui->writeNickOfPeer->setFocusPolicy(StrongFocus);
+    ui->writeWanIpOfPeer->setFocusPolicy(StrongFocus);
+    ui->writeLanIpOfPeer->setFocusPolicy(StrongFocus);
     ui->lineForTypeText->setFocusPolicy(StrongFocus);
+
+=======
+    ui->lineForTypeText->setFocusPolicy(StrongFocus);
+>>>>>>> master
     ui->textFieldForViewMessages->setFocusPolicy(NoFocus);
     ui->textFieldForViewMessages->setReadOnly(true);
     ui->listWithNickName->setFocusPolicy(NoFocus);
 
+<<<<<<< HEAD
+    Peerout peer();
+    Peerin server(3366);
+
+    return;
+=======
+>>>>>>> master
 }
 
 Freechat::~Freechat()
@@ -69,28 +116,62 @@ void Freechat::on_connectionToPeer_clicked(bool checked)
     return;
 }
 
+<<<<<<< HEAD
+void Freechat::on_lineForTypeText_returnPressed()
+{
+    bufferOfMessages += ui->lineForTypeText->text();
+
+    #ifndef Q_DEBUG
+    qDebug() << "Freechat class: " << bufferOfMessages << endl;
+    #endif
+=======
 void Freechat::on_lineForTypeText_textEdited(QString &messages)
 {
     messages = ui->lineForTypeText->text(); //pass text from line for type
     bufferOfMessages += messages;//write inside buffer
+>>>>>>> master
 
     return;
 }
 
 void Freechat::on_writeWanIpOfPeer_returnPressed()
 {
+<<<<<<< HEAD
+    wanIpOfPeer += ui->writeWanIpOfPeer->text();
+
+    #ifndef Q_DEBUG
+    qDebug() << "Freechat class: " << wanIpOfPeer << endl;
+    #endif
+=======
+>>>>>>> master
 
     return;
 }
 
 void Freechat::on_writeLanIpOfPeer_returnPressed()
 {
+<<<<<<< HEAD
+    lanIpOfPeer += ui->writeLanIpOfPeer->text();
+
+    #ifndef Q_DEBUG
+    qDebug() << "Freechat class: " << lanIpOfPeer << endl;
+    #endif
+=======
+>>>>>>> master
 
     return;
 }
 
 void Freechat::on_writeNickOfPeer_returnPressed()
 {
+<<<<<<< HEAD
+    nickNameOfPeer += ui->writeNickOfPeer->text();
+
+    #ifndef Q_DEBUG
+    qDebug() << "Freechat class: " << nickNameOfPeer << endl;
+    #endif
+=======
+>>>>>>> master
 
     return;
 }
