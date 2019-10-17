@@ -13,7 +13,7 @@ extern QString wanIpOfPeer;
 extern QString nickNameOfPeer;
 extern QString bufferOfMessages;
 
-Peerout::Peerout(const QString &ipHost)
+Peerout::Peerout()
     : nextBlockSize(0)
 {
     socket = new QTcpSocket(this);
@@ -22,12 +22,12 @@ Peerout::Peerout(const QString &ipHost)
     qDebug() << "A new socket created.";
     #endif
 
-    socket->connectToHost(ipHost, 3366);
-
     connect(socket, SIGNAL(connected()), this, SLOT(SlotConnected()));
     connect(socket, SIGNAL(readyRead()), this, SLOT(SlotReadyRead()));
     connect(socket, SIGNAL(error(QAbstractSocket::SocketError)),
             this, SLOT(SlotError(QAbstractSocket::SocketError)));
+
+    return;
 }
 
 Peerout::~Peerout()
@@ -125,11 +125,22 @@ void Peerout::SlotSendToServer()
     return;
 }
 
-void Peerout::SlotConnected()
+void Peerout::SlotConnected(QString &ipHost)
 {
-    #ifndef Q_DEBUG
-    qDebug() << "Connected.";
-    #endif
+    socket->connectToHost(ipHost, 3366);
+
+    if(bool connected = (socket->state() == QTcpSocket::ConnectedState) == true)
+    {
+        #ifndef Q_DEBUG
+        qDebug() << "Connected.";
+        #endif
+    }
+    else
+    {
+        #ifndef Q_DEBUG
+        qDebug() << "Error connection.";
+        #endif
+    }
 
     return;
 }

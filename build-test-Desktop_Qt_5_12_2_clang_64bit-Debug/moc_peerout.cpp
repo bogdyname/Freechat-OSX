@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Peerout_t {
-    QByteArrayData data[7];
-    char stringdata0[93];
+    QByteArrayData data[9];
+    char stringdata0[109];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -35,14 +35,16 @@ QT_MOC_LITERAL(0, 0, 7), // "Peerout"
 QT_MOC_LITERAL(1, 8, 13), // "SlotReadyRead"
 QT_MOC_LITERAL(2, 22, 0), // ""
 QT_MOC_LITERAL(3, 23, 13), // "SlotConnected"
-QT_MOC_LITERAL(4, 37, 16), // "SlotSendToServer"
-QT_MOC_LITERAL(5, 54, 9), // "SlotError"
-QT_MOC_LITERAL(6, 64, 28) // "QAbstractSocket::SocketError"
+QT_MOC_LITERAL(4, 37, 8), // "QString&"
+QT_MOC_LITERAL(5, 46, 6), // "ipHost"
+QT_MOC_LITERAL(6, 53, 16), // "SlotSendToServer"
+QT_MOC_LITERAL(7, 70, 9), // "SlotError"
+QT_MOC_LITERAL(8, 80, 28) // "QAbstractSocket::SocketError"
 
     },
     "Peerout\0SlotReadyRead\0\0SlotConnected\0"
-    "SlotSendToServer\0SlotError\0"
-    "QAbstractSocket::SocketError"
+    "QString&\0ipHost\0SlotSendToServer\0"
+    "SlotError\0QAbstractSocket::SocketError"
 };
 #undef QT_MOC_LITERAL
 
@@ -61,15 +63,15 @@ static const uint qt_meta_data_Peerout[] = {
 
  // slots: name, argc, parameters, tag, flags
        1,    0,   34,    2, 0x0a /* Public */,
-       3,    0,   35,    2, 0x0a /* Public */,
-       4,    0,   36,    2, 0x0a /* Public */,
-       5,    1,   37,    2, 0x0a /* Public */,
+       3,    1,   35,    2, 0x0a /* Public */,
+       6,    0,   38,    2, 0x0a /* Public */,
+       7,    1,   39,    2, 0x0a /* Public */,
 
  // slots: parameters
     QMetaType::Void,
+    QMetaType::Void, 0x80000000 | 4,    5,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 6,    2,
+    QMetaType::Void, 0x80000000 | 8,    2,
 
        0        // eod
 };
@@ -81,7 +83,7 @@ void Peerout::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         Q_UNUSED(_t)
         switch (_id) {
         case 0: _t->SlotReadyRead(); break;
-        case 1: _t->SlotConnected(); break;
+        case 1: _t->SlotConnected((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 2: _t->SlotSendToServer(); break;
         case 3: _t->SlotError((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
         default: ;

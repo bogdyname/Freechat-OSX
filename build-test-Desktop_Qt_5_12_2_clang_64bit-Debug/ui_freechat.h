@@ -116,6 +116,8 @@ public:
         textFieldForViewMessages->setFocusPolicy(Qt::NoFocus);
         textFieldForViewMessages->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
 "background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.392045 rgba(0, 0, 0, 255), stop:0.607955 rgba(255, 255, 255, 255));\n"
+"color: rgb(255, 255, 255);\n"
+"font: 57 12pt \"Letter Gothic Std\";\n"
 ""));
         textFieldForViewMessages->setReadOnly(true);
 
@@ -127,7 +129,9 @@ public:
         listWithNickName->setFocusPolicy(Qt::NoFocus);
         listWithNickName->setAutoFillBackground(false);
         listWithNickName->setStyleSheet(QString::fromUtf8("color: rgb(255, 255, 255);\n"
-"background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.392045 rgba(0, 0, 0, 255), stop:0.607955 rgba(255, 255, 255, 255));"));
+"background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.392045 rgba(0, 0, 0, 255), stop:0.607955 rgba(255, 255, 255, 255));\n"
+"color: rgb(255, 255, 255);\n"
+"font: 57 12pt \"Letter Gothic Std\";"));
 
         hboxLayout->addWidget(listWithNickName);
 
@@ -187,11 +191,11 @@ public:
     void retranslateUi(QDialog *Freechat)
     {
         Freechat->setWindowTitle(QApplication::translate("Freechat", "Freechat", nullptr));
-        writeWanIpOfPeer->setText(QApplication::translate("Freechat", "Write here WAN IP of peer", nullptr));
-        writeLanIpOfPeer->setText(QApplication::translate("Freechat", "Write here LAN IP of peer", nullptr));
-        writeNickOfPeer->setText(QApplication::translate("Freechat", "Write here nickname of peer", nullptr));
+        writeWanIpOfPeer->setText(QString());
+        writeLanIpOfPeer->setText(QString());
+        writeNickOfPeer->setText(QString());
         labelMessage->setText(QApplication::translate("Freechat", "Message", nullptr));
-        lineForTypeText->setText(QApplication::translate("Freechat", "Type here", nullptr));
+        lineForTypeText->setText(QString());
         showNetworkInfo->setText(QApplication::translate("Freechat", "Info of Network", nullptr));
         connectionToPeer->setText(QApplication::translate("Freechat", "Connecting to peer", nullptr));
     } // retranslateUi
