@@ -21,6 +21,7 @@ Freechat::Freechat(QWidget *parent)
 {
     ui->setupUi(this);
 
+<<<<<<< HEAD
     QNetworkAccessManager nam;
     QNetworkRequest req(QUrl("http://www.google.com"));
     QNetworkReply *reply = nam.get(req);
@@ -58,14 +59,20 @@ Freechat::Freechat(QWidget *parent)
     ui->writeLanIpOfPeer->setFocusPolicy(StrongFocus);
     ui->lineForTypeText->setFocusPolicy(StrongFocus);
 
+=======
+    ui->lineForTypeText->setFocusPolicy(StrongFocus);
+>>>>>>> master
     ui->textFieldForViewMessages->setFocusPolicy(NoFocus);
     ui->textFieldForViewMessages->setReadOnly(true);
     ui->listWithNickName->setFocusPolicy(NoFocus);
 
+<<<<<<< HEAD
     Peerout peer();
     Peerin server(3366);
 
     return;
+=======
+>>>>>>> master
 }
 
 Freechat::~Freechat()
@@ -109,6 +116,7 @@ void Freechat::on_connectionToPeer_clicked(bool checked)
     return;
 }
 
+<<<<<<< HEAD
 void Freechat::on_lineForTypeText_returnPressed()
 {
     bufferOfMessages += ui->lineForTypeText->text();
@@ -116,39 +124,54 @@ void Freechat::on_lineForTypeText_returnPressed()
     #ifndef Q_DEBUG
     qDebug() << "Freechat class: " << bufferOfMessages << endl;
     #endif
+=======
+void Freechat::on_lineForTypeText_textEdited(QString &messages)
+{
+    messages = ui->lineForTypeText->text(); //pass text from line for type
+    bufferOfMessages += messages;//write inside buffer
+>>>>>>> master
 
     return;
 }
 
 void Freechat::on_writeWanIpOfPeer_returnPressed()
 {
+<<<<<<< HEAD
     wanIpOfPeer += ui->writeWanIpOfPeer->text();
 
     #ifndef Q_DEBUG
     qDebug() << "Freechat class: " << wanIpOfPeer << endl;
     #endif
+=======
+>>>>>>> master
 
     return;
 }
 
 void Freechat::on_writeLanIpOfPeer_returnPressed()
 {
+<<<<<<< HEAD
     lanIpOfPeer += ui->writeLanIpOfPeer->text();
 
     #ifndef Q_DEBUG
     qDebug() << "Freechat class: " << lanIpOfPeer << endl;
     #endif
+=======
+>>>>>>> master
 
     return;
 }
 
 void Freechat::on_writeNickOfPeer_returnPressed()
 {
+<<<<<<< HEAD
     nickNameOfPeer += ui->writeNickOfPeer->text();
 
     #ifndef Q_DEBUG
     qDebug() << "Freechat class: " << nickNameOfPeer << endl;
     #endif
+=======
+>>>>>>> master
 
     return;
 }
