@@ -21,58 +21,47 @@ Freechat::Freechat(QWidget *parent)
 {
     ui->setupUi(this);
 
-<<<<<<< HEAD
-    QNetworkAccessManager nam;
-    QNetworkRequest req(QUrl("http://www.google.com"));
-    QNetworkReply *reply = nam.get(req);
-    QEventLoop loop;
-    connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
-    loop.exec();
+    //Network
+    Peerout peer;
+    Peerin server(3366);
+    ConnectionF2F netManager;
+    netManager.NetworkInfo();
 
-    if(reply->bytesAvailable())
-    {
-        ui->writeNickOfPeer->setReadOnly(true);
-        ui->writeWanIpOfPeer->setReadOnly(true);
-        ui->writeLanIpOfPeer->setReadOnly(true);
-        ui->lineForTypeText->setReadOnly(true);
-    }
-    else
-    {
-        /*clear code*/
-    }
+    //Connecting UI widgets with network object code
+    connect(ui->connectionToPeer, SIGNAL(clicked()), &peer, SLOT(SlotConnected()));
+    connect(ui->lineForTypeText, SIGNAL(returnPressed()), &peer, SLOT(SlotSendToServer()));
 
-    //ui->writeWanIpOfPeer->setInputMask("000.000.000.000");
-    //ui->writeLanIpOfPeer->setInputMask("000.000.000.000");
+    //UI connection
+    connect(ui->lineForTypeText, SIGNAL(returnPressed()), ui->lineForTypeText, SLOT(clear()));
+    connect(ui->writeWanIpOfPeer, SIGNAL(returnPressed()), ui->writeWanIpOfPeer, SLOT(clear()));
+    connect(ui->writeLanIpOfPeer, SIGNAL(returnPressed()), ui->writeLanIpOfPeer, SLOT(clear()));
+    connect(ui->writeNickOfPeer, SIGNAL(returnPressed()), ui->writeNickOfPeer, SLOT(clear()));
+    connect(ui->showNetworkInfo, SIGNAL(clicked(bool)), ui->showNetworkInfo, SLOT(setChecked(bool)));
+    connect(ui->connectionToPeer, SIGNAL(clicked(bool)), ui->connectionToPeer, SLOT(setChecked(bool)));
 
+    //UI style and focus
+    ui->showNetworkInfo->setText("Info of Network");
+    ui->connectionToPeer->setText("Connecting to peer");
+    ui->lineForTypeText->setPlaceholderText("Type here");
     ui->writeNickOfPeer->setPlaceholderText("Write here nickname of peer");
     ui->writeWanIpOfPeer->setPlaceholderText("Write here WAN IP of peer");
     ui->writeLanIpOfPeer->setPlaceholderText("Write here LAN IP of peer");
-    ui->lineForTypeText->setPlaceholderText("Type here");
 
     ui->writeNickOfPeer->setMaxLength(15);
     ui->writeWanIpOfPeer->setMaxLength(15);
     ui->writeLanIpOfPeer->setMaxLength(15);
     ui->lineForTypeText->setMaxLength(200);
 
-    ui->writeNickOfPeer->setFocusPolicy(StrongFocus);
-    ui->writeWanIpOfPeer->setFocusPolicy(StrongFocus);
-    ui->writeLanIpOfPeer->setFocusPolicy(StrongFocus);
-    ui->lineForTypeText->setFocusPolicy(StrongFocus);
+    ui->writeNickOfPeer->setFocusPolicy(WheelFocus);
+    ui->writeWanIpOfPeer->setFocusPolicy(WheelFocus);
+    ui->writeLanIpOfPeer->setFocusPolicy(WheelFocus);
+    ui->lineForTypeText->setFocusPolicy(WheelFocus);
 
-=======
-    ui->lineForTypeText->setFocusPolicy(StrongFocus);
->>>>>>> master
     ui->textFieldForViewMessages->setFocusPolicy(NoFocus);
     ui->textFieldForViewMessages->setReadOnly(true);
-    ui->listWithNickName->setFocusPolicy(NoFocus);
-
-<<<<<<< HEAD
-    Peerout peer();
-    Peerin server(3366);
+    ui->listWithNickName->setFocusPolicy(ClickFocus);
 
     return;
-=======
->>>>>>> master
 }
 
 Freechat::~Freechat()
@@ -80,98 +69,94 @@ Freechat::~Freechat()
     delete ui;
 }
 
-void Freechat::on_showNetworkInfo_clicked(bool checked)
+void Freechat::on_showNetworkInfo_clicked()
 {
-    switch(checked)
+    checkNetworkConnection = ConnectionF2F::CheckConnection;
+
+    QString status = QString("<h1>Your LAN IP address: %1</h1>").arg(Freechat::yourIp);
+
+    if((*checkNetworkConnection)() == 101)
     {
-    case true:
-        QMessageBox::information(this, tr("Network Info"),
-                                 tr("Your LAN IP address: "), yourIp);
-        break;
-    case false:
-        QMessageBox::information(this, tr("Error"),
-                                 tr("Check your network connection."));
-        break;
+        QMessageBox::information(this, tr("<title>Network Info</title>"),
+                             status, "ok");
+    }
+    else
+    {
+        QMessageBox::critical(this, tr("<title>Error</title>"),
+                             tr("<h1>Check your network connection.</h1>"), "ok");
     }
 
     return;
 }
 
-void Freechat::on_connectionToPeer_clicked(bool checked)
+void Freechat::on_connectionToPeer_clicked() // do nto use this button now, bc it crashing all system
 {
-    switch(checked)
+    //checkConnection = ; need make f() for check connection to peer and passing it like * of f() to here
+
+    bool ok = false;
+
+    if(ok == true)
     {
-    case true:
-    {
-        QMessageBox::information(this, tr("Connection"),
-                                 tr("Connecting to peer..."));
+        QMessageBox::information(this, tr("<title>Connection</title>"),
+                             tr("<h1>Connecting to peer...</h1>"), "ok");
     }
-        break;
-    case false:
-        QMessageBox::information(this, tr("Disconnected"),
-                                 tr("Peer does not want to connect with you"));
-        break;
+    else
+    {
+        QMessageBox::information(this, tr("<title>Disconnected</title>"),
+                             tr("<h1>Peer does not want to connect with you</h1>"), "ok");
     }
 
     return;
 }
 
-<<<<<<< HEAD
 void Freechat::on_lineForTypeText_returnPressed()
 {
-    bufferOfMessages += ui->lineForTypeText->text();
+    Freechat::bufferOfMessages += ui->lineForTypeText->text();
 
     #ifndef Q_DEBUG
-    qDebug() << "Freechat class: " << bufferOfMessages << endl;
+    qDebug() << "Freechat class: " << Freechat::bufferOfMessages;
     #endif
-=======
-void Freechat::on_lineForTypeText_textEdited(QString &messages)
-{
-    messages = ui->lineForTypeText->text(); //pass text from line for type
-    bufferOfMessages += messages;//write inside buffer
->>>>>>> master
+
+    Freechat::bufferOfMessages.clear();
 
     return;
 }
 
 void Freechat::on_writeWanIpOfPeer_returnPressed()
 {
-<<<<<<< HEAD
-    wanIpOfPeer += ui->writeWanIpOfPeer->text();
+    Freechat::wanIpOfPeer += ui->writeWanIpOfPeer->text();
 
     #ifndef Q_DEBUG
-    qDebug() << "Freechat class: " << wanIpOfPeer << endl;
+    qDebug() << "Freechat class: " << Freechat::wanIpOfPeer;
     #endif
-=======
->>>>>>> master
+
+    Freechat::wanIpOfPeer.clear();
 
     return;
 }
 
 void Freechat::on_writeLanIpOfPeer_returnPressed()
 {
-<<<<<<< HEAD
-    lanIpOfPeer += ui->writeLanIpOfPeer->text();
+    Freechat::lanIpOfPeer += ui->writeLanIpOfPeer->text();
 
     #ifndef Q_DEBUG
-    qDebug() << "Freechat class: " << lanIpOfPeer << endl;
+    qDebug() << "Freechat class: " << Freechat::lanIpOfPeer;
     #endif
-=======
->>>>>>> master
+
+    Freechat::lanIpOfPeer.clear();
 
     return;
 }
 
 void Freechat::on_writeNickOfPeer_returnPressed()
 {
-<<<<<<< HEAD
-    nickNameOfPeer += ui->writeNickOfPeer->text();
+    Freechat::nickNameOfPeer += ui->writeNickOfPeer->text();
 
     #ifndef Q_DEBUG
-    qDebug() << "Freechat class: " << nickNameOfPeer << endl;
+    qDebug() << "Freechat class: " << Freechat::nickNameOfPeer;
     #endif
-=======
->>>>>>> master
+
+    Freechat::nickNameOfPeer.clear();
 
     return;
 }

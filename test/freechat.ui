@@ -47,11 +47,7 @@
 font: 57 12pt &quot;Letter Gothic Std&quot;;</string>
          </property>
          <property name="text">
-<<<<<<< HEAD
           <string/>
-=======
-          <string>Write here WAN IP of peer</string>
->>>>>>> master
          </property>
         </widget>
        </item>
@@ -69,11 +65,7 @@ font: 57 12pt &quot;Letter Gothic Std&quot;;</string>
 font: 57 12pt &quot;Letter Gothic Std&quot;;</string>
          </property>
          <property name="text">
-<<<<<<< HEAD
           <string/>
-=======
-          <string>Write here LAN IP of peer</string>
->>>>>>> master
          </property>
         </widget>
        </item>
@@ -97,11 +89,7 @@ font: 57 12pt &quot;Letter Gothic Std&quot;;</string>
 font: 57 12pt &quot;Letter Gothic Std&quot;;</string>
          </property>
          <property name="text">
-<<<<<<< HEAD
           <string/>
-=======
-          <string>Write here nickname of peer</string>
->>>>>>> master
          </property>
         </widget>
        </item>
@@ -134,11 +122,8 @@ font: 57 12pt &quot;Letter Gothic Std&quot;;</string>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);
 background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.392045 rgba(0, 0, 0, 255), stop:0.607955 rgba(255, 255, 255, 255));
-<<<<<<< HEAD
 color: rgb(255, 255, 255);
 font: 57 12pt &quot;Letter Gothic Std&quot;;
-=======
->>>>>>> master
 </string>
        </property>
        <property name="readOnly">
@@ -162,13 +147,9 @@ font: 57 12pt &quot;Letter Gothic Std&quot;;
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(255, 255, 255);
-<<<<<<< HEAD
 background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.392045 rgba(0, 0, 0, 255), stop:0.607955 rgba(255, 255, 255, 255));
 color: rgb(255, 255, 255);
 font: 57 12pt &quot;Letter Gothic Std&quot;;</string>
-=======
-background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.392045 rgba(0, 0, 0, 255), stop:0.607955 rgba(255, 255, 255, 255));</string>
->>>>>>> master
        </property>
       </widget>
      </item>
@@ -211,11 +192,7 @@ color: rgb(255, 255, 255);
 background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.392045 rgba(0, 0, 0, 255), stop:0.607955 rgba(255, 255, 255, 255));</string>
        </property>
        <property name="text">
-<<<<<<< HEAD
         <string/>
-=======
-        <string>Type here</string>
->>>>>>> master
        </property>
       </widget>
      </item>
@@ -233,7 +210,7 @@ background-color: qlineargradient(spread:pad, x1:1, y1:0, x2:1, y2:0, stop:0.392
 font: 57 12pt &quot;Letter Gothic Std&quot;;</string>
        </property>
        <property name="text">
-        <string>Info of Network</string>
+        <string/>
        </property>
       </widget>
      </item>
@@ -244,7 +221,7 @@ font: 57 12pt &quot;Letter Gothic Std&quot;;</string>
 font: 57 12pt &quot;Letter Gothic Std&quot;;</string>
        </property>
        <property name="text">
-        <string>Connecting to peer</string>
+        <string/>
        </property>
       </widget>
      </item>

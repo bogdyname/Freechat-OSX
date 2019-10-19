@@ -26,19 +26,11 @@ private:
     QString ip;
 
 public:
-<<<<<<< HEAD
     explicit ConnectionF2F(QObject *parent = nullptr);
     ~ConnectionF2F();
 
 public:
     void NetworkInfo();
-=======
-    ConnectionF2F(QObject *parent = nullptr);
-    ~ConnectionF2F();
-
-public slots:
-    void NetworkInfo();
-    void WriteIpAddressFromPeer();
->>>>>>> master
+    static int CheckConnection();
 };
 #endif

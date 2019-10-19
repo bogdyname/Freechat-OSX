@@ -22,15 +22,9 @@ private:
 
 public:
     ~Bin();
-<<<<<<< HEAD
     explicit Bin(QObject *parent = nullptr);
 
 private:
-=======
-    Bin(QObject *parent = nullptr);
-
-public:
->>>>>>> master
     void AddPeer(QString &nickname, QString &Lanip, QString &Wanip);
     void DeletePeer();
     void GetNickname(QList<QString> &nick);

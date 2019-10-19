@@ -5,25 +5,38 @@
 
 #include "Network/connectionf2f.h"
 
-<<<<<<< HEAD
 extern QString yourIp;
-=======
-static QString globalNetworkBuffer;
->>>>>>> master
 
 ConnectionF2F::ConnectionF2F(QObject *parent)
     : QTcpSocket(parent)
 {
-<<<<<<< HEAD
-    /*now is empty*/
-=======
+     /*now is empty*/
 
->>>>>>> master
+    return;
 }
 
 ConnectionF2F::~ConnectionF2F()
 {
 
+}
+
+int ConnectionF2F::CheckConnection()
+{
+    QNetworkAccessManager nam;
+    QNetworkRequest req(QUrl("http://www.google.com"));
+    QNetworkReply *reply = nam.get(req);
+    QEventLoop loop;
+    QObject::connect(reply, SIGNAL(finished()), &loop, SLOT(quit()));
+    loop.exec();
+
+    if(reply->bytesAvailable())
+    {
+        return 101;
+    }
+    else
+    {
+        return 404;
+    }
 }
 
 void ConnectionF2F::NetworkInfo()
@@ -71,17 +84,5 @@ void ConnectionF2F::NetworkInfo()
        qDebug() << "Netmask = " << localNetmask;
        #endif
 
-<<<<<<< HEAD
        Freechat::yourIp += localhostIP;
-=======
-       globalNetworkBuffer += localhostIP;
-}
-
-void ConnectionF2F::WriteIpAddressFromPeer()
-{
-    ip += globalNetworkBuffer;
-    globalNetworkBuffer.clear();
-
-    return;
->>>>>>> master
 }
