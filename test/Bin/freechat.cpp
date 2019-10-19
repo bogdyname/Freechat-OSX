@@ -27,6 +27,27 @@ Freechat::Freechat(QWidget *parent)
     ConnectionF2F netManager;
     netManager.NetworkInfo();
 
+    //variables for pointer of function from ConnectionF2F
+    checkNetworkConnection = ConnectionF2F::CheckConnection;
+
+    //close all QLineEdit if network shutdown
+    switch((*checkNetworkConnection)())
+    {
+        case 101:
+        {
+            /*clear code*/
+        }
+        break;
+        case 404:
+        {
+            ui->writeNickOfPeer->setReadOnly(true);
+            ui->writeWanIpOfPeer->setReadOnly(true);
+            ui->writeLanIpOfPeer->setReadOnly(true);
+            ui->lineForTypeText->setReadOnly(true);
+        }
+        break;
+    }
+
     //Connecting UI widgets with network object code
     connect(ui->connectionToPeer, SIGNAL(clicked()), &peer, SLOT(SlotConnected()));
     connect(ui->lineForTypeText, SIGNAL(returnPressed()), &peer, SLOT(SlotSendToServer()));
@@ -71,19 +92,22 @@ Freechat::~Freechat()
 
 void Freechat::on_showNetworkInfo_clicked()
 {
-    checkNetworkConnection = ConnectionF2F::CheckConnection;
-
     QString status = QString("<h1>Your LAN IP address: %1</h1>").arg(Freechat::yourIp);
 
-    if((*checkNetworkConnection)() == 101)
+    switch((*checkNetworkConnection)())
     {
-        QMessageBox::information(this, tr("<title>Network Info</title>"),
+        case 101:
+        {
+            QMessageBox::information(this, tr("<title>Network Info</title>"),
                              status, "ok");
-    }
-    else
-    {
-        QMessageBox::critical(this, tr("<title>Error</title>"),
+        }
+        break;
+        case 404:
+        {
+            QMessageBox::critical(this, tr("<title>Error</title>"),
                              tr("<h1>Check your network connection.</h1>"), "ok");
+        }
+        break;
     }
 
     return;
@@ -102,8 +126,8 @@ void Freechat::on_connectionToPeer_clicked() // do nto use this button now, bc i
     }
     else
     {
-        QMessageBox::information(this, tr("<title>Disconnected</title>"),
-                             tr("<h1>Peer does not want to connect with you</h1>"), "ok");
+        QMessageBox::critical(this, tr("<title>Error</title>"),
+                             tr("<h1>Error connecting to peer.</h1>"), "ok");
     }
 
     return;
