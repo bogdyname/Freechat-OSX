@@ -31,6 +31,5 @@ public:
 
 public:
     void NetworkInfo();
-    static int CheckConnection();
 };
 #endif
