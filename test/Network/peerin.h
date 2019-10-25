@@ -25,7 +25,7 @@ private:
     QTcpSocket *clientSocket2 = nullptr;
 
 public:
-    explicit Peerin(unsigned short port, QObject *parent = nullptr);
+    explicit Peerin(QObject *parent = nullptr);
     ~Peerin();
 
 private:

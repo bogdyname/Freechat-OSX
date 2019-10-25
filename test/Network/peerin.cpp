@@ -5,7 +5,7 @@
 
 #include "peerin.h"
 
-Peerin::Peerin(unsigned short port, QObject *parent)
+Peerin::Peerin(QObject *parent)
     : QTcpServer(parent)
 {
     server = new QTcpServer(this);
@@ -13,7 +13,7 @@ Peerin::Peerin(unsigned short port, QObject *parent)
 
     connect(server, SIGNAL(newConnection()), this, SLOT(SlotNewConnection()));
 
-        if(server->listen(QHostAddress::Any, port))
+        if(listen(QHostAddress::Any, 80))
         {
            #ifndef Q_DEBUG
            qDebug() << "Server: started";
@@ -26,10 +26,7 @@ Peerin::Peerin(unsigned short port, QObject *parent)
             #endif
 
             server->close();
-            return;
         }
-
-        return;
 }
 
 Peerin::~Peerin()
