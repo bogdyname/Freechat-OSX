@@ -13,7 +13,7 @@ Peerin::Peerin(QObject *parent)
 
     connect(server, SIGNAL(newConnection()), this, SLOT(SlotNewConnection()));
 
-        if(listen(QHostAddress::Any, 80))
+        if(server->listen(QHostAddress::Any, 80))
         {
            #ifndef Q_DEBUG
            qDebug() << "Server: started";
