@@ -5,14 +5,6 @@
 
 #include "peerout.h"
 
-extern QString globalBuffer;
-extern QString viewField;
-extern QString yourIp;
-extern QString lanIpOfPeer;
-extern QString wanIpOfPeer;
-extern QString nickNameOfPeer;
-extern QString bufferOfMessages;
-
 Peerout::Peerout()
     : nextBlockSize(0)
 {
@@ -40,6 +32,8 @@ Peerout::~Peerout()
     {
         /*clear code*/
     }
+
+    return;
 }
 
 void Peerout::SlotReadyRead()
@@ -141,6 +135,8 @@ void Peerout::SlotConnected()
         qDebug() << "Error connection.";
         #endif
     }
+
+    Freechat::lanIpOfPeer.clear();
 
     return;
 }
