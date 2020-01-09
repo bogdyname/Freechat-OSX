@@ -10,15 +10,12 @@
 #include <QPointer>
 
  QString Freechat::globalBuffer;
- QString Freechat::viewField;
+ QTextEdit *Freechat::viewField;
  QString Freechat::yourIp;
  QString Freechat::lanIpOfPeer;
  QString Freechat::wanIpOfPeer;
  QString Freechat::nickNameOfPeer;
  QString Freechat::bufferOfMessages;
-
- QTextEdit *Freechat::pointerOnPeerin;
- QTextEdit *Freechat::pointerOnPeerout;
 
  static QPointer<Peerin> server = nullptr;
 
@@ -42,9 +39,6 @@ Freechat::Freechat(QWidget *parent)
     netManager.NetworkInfo();
     server = new Peerin;
 
-    pointerOnPeerin = textFieldForViewMessages;
-    pointerOnPeerout = textFieldForViewMessages;
-
     QTimer *timer = new QTimer;
     timer->setInterval(10000);
     connect(timer, SIGNAL(timeout()), this, SLOT(ServerStillWorking()));
@@ -59,6 +53,14 @@ Freechat::Freechat(QWidget *parent)
     connect(ui->writeWanIpOfPeer, SIGNAL(returnPressed()), ui->writeWanIpOfPeer, SLOT(clear()));
     connect(ui->writeLanIpOfPeer, SIGNAL(returnPressed()), ui->writeLanIpOfPeer, SLOT(clear()));
     connect(ui->writeNickOfPeer, SIGNAL(returnPressed()), ui->writeNickOfPeer, SLOT(clear()));
+
+    //new field for show messages
+    Freechat::viewField = new QTextEdit;
+    Freechat::viewField->setFocusPolicy(NoFocus);
+    Freechat::viewField->setReadOnly(true);
+    Freechat::viewField->setTextColor(white);
+
+    ui->horizontalLayout_1->addWidget(Freechat::viewField);
 
     //UI style and focus
     ui->showNetworkInfo->setText("Info of Network");
@@ -78,8 +80,6 @@ Freechat::Freechat(QWidget *parent)
     ui->writeLanIpOfPeer->setFocusPolicy(WheelFocus);
     ui->lineForTypeText->setFocusPolicy(WheelFocus);
 
-    ui->textFieldForViewMessages->setFocusPolicy(NoFocus);
-    ui->textFieldForViewMessages->setReadOnly(true);
     ui->listWithNickName->setFocusPolicy(ClickFocus);
 
     //variables for pointer of function from ConnectionF2F
@@ -142,6 +142,7 @@ void Freechat::ServerStillWorking()
     return;
 }
 
+//check this method for scan BUG OF DOUBLE show QMessageBox::info about ip addr
 void Freechat::on_showNetworkInfo_clicked()
 {
     QString status = QString("<h1>Your LAN IP address: %1</h1>").arg(Freechat::yourIp);
@@ -169,8 +170,8 @@ void Freechat::on_lineForTypeText_returnPressed()
 {
     QTime time = QTime::currentTime();
     Freechat::bufferOfMessages += ui->lineForTypeText->text();
-    ui->textFieldForViewMessages->insertPlainText("Me:" + time.toString() +
-                                 ": " + Freechat::bufferOfMessages + "\n");
+    Freechat::viewField->insertPlainText("Me:" + time.toString() +
+                         ": " + Freechat::bufferOfMessages + "\n");
 
     Freechat::bufferOfMessages.clear();//clear in netwrok code
 
